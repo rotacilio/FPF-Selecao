@@ -1,0 +1,80 @@
+<div class="row">
+    <div class="col-lg-12">
+        <div class="page-header">
+            <h2>{{title}}</h2>
+            <div class="toolbar">
+                <ul class="nav nav-pills pull-right">
+                    <li><button type="button" class="btn btn-success" ng-click="redirectToCreate()">Novo</button></li>
+                    <li><button type="button" class="btn btn-danger" ng-click="apagarProduto(produto)">Apagar</button></li>
+                    <li><button type="button" class="btn btn-primary" ng-click="redirectToList()">Listar</button></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-lg-12">
+        <div class="alert alert-danger" ng-show="errors.length > 0">
+            <ul>
+                <li ng-repeat="(key,value) in errors">{{value.message}}</li>
+            </ul>
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-lg-12">
+        <form class="form-horizontal well" name="produtoForm">
+            <div class="form-group">
+                <label for="descricao" class="col-lg-2 control-label">Descrição:</label>
+                <div class="col-lg-8">
+                    <input class="form-control" id="descricao" name="descricao" placeholder="Insira a descrição do produto" type="text" ng-model="produto.descricao" ng-required="true" />
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="dataCompra" class="col-lg-2 control-label">Data da Compra:</label>
+                <div class="col-lg-4">
+                    <input class="form-control" id="dataCompra" name="dataCompra" placeholder="Insira a data da compra do produto" type="text" ng-model="produto.dataCompra" ng-required="true" ui-date />
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="preco" class="col-lg-2 control-label">Preço (R$):</label>
+                <div class="col-lg-4">
+                    <input class="form-control" id="preco" name="preco" placeholder="Insira o preço do produto" type="text" ng-model="produto.preco" ng-required="true" ui-price />
+                    <label class="col-lg-10 text-left">Dólar (US$): {{produto.preco * 3.599}}</label>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-lg-2 control-label">Origem:</label>
+                <div class="col-lg-6">
+                    <select class="form-control" name="origem" ng-model="produto.origem">
+                        <option value="">Selecione a origem do produto</option>
+                        <option ng-repeat="origem in origens"
+                                value="{{origem}}"
+                                ng-selected="produto.origem.id == origem.id">
+                            {{origem.descricao}}
+                        </option>
+                    </select>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-lg-2 control-label">Categoria:</label>
+                <div class="col-lg-6">
+                    <select class="form-control" name="categoria" ng-model="produto.categoria">
+                        <option value="">Selecione a categoria do produto</option>
+                        <option ng-repeat="categoria in categorias"
+                                value="{{categoria}}"
+                                ng-selected="produto.categoria.id == categoria.id">
+                            {{categoria.descricao}}
+                        </option>
+                    </select>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-lg-10 col-lg-offset-2">
+                    <button type="reset" class="btn btn-default">Limpar</button>
+                    <button type="button" class="btn btn-primary" ng-click="salvarProduto(produto)">Salvar Alterações</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
